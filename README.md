@@ -2,12 +2,18 @@
 Small format software-directed radio telescope intended for backyard astronomy.
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Goals and Vision](#goals-and-vision)
-- [Research Notes](#research-notes)
-- [Ideas and Brainstorming](#ideas-and-brainstorming)
-- [Challenges and Questions](#challenges-and-questions)
-- [Next Steps](#next-steps)
+- [BackyardRadioScope](#backyardradioscope)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Goals and Vision](#goals-and-vision)
+  - [Research Notes](#research-notes)
+    - [Constants](#constants)
+    - [Antenna Notes](#antenna-notes)
+  - [Ideas and Brainstorming](#ideas-and-brainstorming)
+    - [Signal Path Layout](#signal-path-layout)
+    - [Hardware Candidates](#hardware-candidates)
+  - [Challenges and Questions](#challenges-and-questions)
+  - [Next Steps](#next-steps)
 
 ## Introduction
 This repository is currently a space for brainstorming, researching, and developing ideas for the BackyardRadioScope project. The goal is to explore the feasibility and design of a small, software-directed radio telescope for amateur astronomy enthusiasts.
@@ -27,11 +33,54 @@ Document findings from your research here. Include:
 - Notes on existing technologies or similar projects.
 - Technical concepts or principles to explore.
 
+### Constants
+
+- Hydrogen Line - 1.42 GHz
+  - Full Wave - 21.11 cm ( 8.32" )
+  -  1/2 Wave - 10.56 cm ( 4.16" )
+  -  1/4 Wave -  5.28 cm ( 2.08" )
+
+### Antenna Notes
+
+- Return Loss - Reflection noise of signals in the antenna. 
+- Antenna Wave Size - 1/4, 1/2, Full
+  - Hydrogen Line - 
+- Antenna spacing - 1/2 wave
+
 ## Ideas and Brainstorming
 Use this section to jot down ideas, no matter how rough. For example:
 - Potential hardware components (e.g., SDRs, antennas).
 - Software features or tools.
 - Possible use cases or applications.
+
+Currently imagined as a 3x3x3 cube of hardware delayed and filtered antennas. The cube will have one output that is a sum of the signals from all antennas (probably a microcontroller). Cube size is currently imagined to be somewhere between 6" and 1' in length/width/height with all 9 antennas evenly spaced and facing upwards. 
+
+### Signal Path Layout
+Antenna => Filter => Amplifier => Delay => Summing? => Controller
+
+Antenna gain pattern needs to match the area of the sky seeking to be reasonable scanned. This is a maximum of 180 degrees (horizon to horizon), but more than likely will normally be less than that by 10-20 degrees from surrounding trees and houses (140 - 160 degree total range). Filters should be inline with the antenna, and before the delay. Delay needs to be controlled remotely, and is responsible for the beam steering of the array. Unsure if signals should be summed in a circuit or fed straight into the controller and summed there. Might be worth pre-summing to increase signal further above noise floor before hitting the controller.
+
+### Hardware Candidates
+Functionality and Cost are key concerns. Active or passive? The broader the band coverage the better, or have fixed to Hydrogen Line.
+
+- **Antennas**
+  - Helical
+    - Possibly too big, unsure if antenna can be used at partial wavelength sizes
+  - Dipole
+    - https://www.mouser.com/datasheet/2/447/datasheet_sb617_7125g0400_1712181779-3503718.pdf
+    - https://www.mouser.com/datasheet/2/4/ant_190541b97_data_sheet-3397010.pdf
+  - Log Periodic
+  - Loop Antenna
+    - 1/10 wavelength circumfrence
+  - Patch
+- **Filter**
+  - Fixed or Adjustable?
+  - Nooelec SAWbird+ H1 Barebones
+    - Inline filter preset to Hydrogen line ( good first candidate for inital scope frequency )
+- **Delay**
+- **Controller**
+  - FPGA
+  - Microcontroller
 
 ## Challenges and Questions
 List any challenges or open questions you encounter during brainstorming:
