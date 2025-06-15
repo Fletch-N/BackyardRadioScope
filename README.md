@@ -64,10 +64,10 @@ Antenna (per element) => Filter => Low-Noise Amplifier (LNA) => Variable Delay/P
 Antenna gain pattern needs to match the area of the sky seeking to be reasonably scanned. This is a maximum of 180 degrees (horizon to horizon), but more than likely will normally be less than that by 10-20 degrees from surrounding trees and houses (140 - 160 degree total range). Filters should be inline with the antenna, and before the delay. Delay/phase shifting is used for beam steering and must be controlled remotely. A downconverting mixer can be used to shift the signal to a lower intermediate frequency (IF) for easier digitization and processing. Signals can be summed in analog before ADC, or digitized individually and summed in the controller (digital beamforming). Pre-summing may help increase signal above the noise floor before hitting the controller.
 
 ### Hardware Candidates
-Functionality and Cost are key concerns. Active or passive? The broader the band coverage the better, or have fixed to Hydrogen Line.
+Functionality and cost are key concerns. The broader the band coverage the better, or have fixed to Hydrogen Line.
 
-- **Antennas**
-  Thinking size is the most important factor here. Directionality is secondary, and should not be too extreme to prevent limiting the directional capabilities of the phased array.
+- **Antennas (per element)**
+  - Size is the most important factor. Directionality should not be too extreme to avoid limiting the array's steering capability.
   - Helical
     - Possibly too big, unsure if antenna can be used at partial wavelength sizes
   - Dipole
@@ -75,17 +75,35 @@ Functionality and Cost are key concerns. Active or passive? The broader the band
     - https://www.mouser.com/datasheet/2/4/ant_190541b97_data_sheet-3397010.pdf
   - Log Periodic
   - Loop Antenna
-    -  down to 1/10 wavelength circumfrence
+    - Down to 1/10 wavelength circumference
   - Patch
-    - about same size as full wavelength loop antenna, maybe a little smaller
-- **Filter**
-  - Fixed or Adjustable?
+    - About same size as full wavelength loop antenna, maybe a little smaller
+
+- **Filter (per element)**
+  - Fixed or adjustable?
   - Nooelec SAWbird+ H1 Barebones
-    - Inline filter preset to Hydrogen line ( good first candidate for inital scope frequency )
-- **Delay**
+    - Inline filter preset to Hydrogen line (good first candidate for initial scope frequency)
+
+- **Low-Noise Amplifier (LNA, per element)**
+  - Critical for boosting weak signals with minimal added noise.
+
+- **Variable Delay/Phase Shifter (per element)**
+  - Used for beam steering, must be remotely controllable.
+
+- **Downconverting Mixer (per element, optional)**
+  - Shifts the signal to a lower intermediate frequency (IF) for easier digitization and processing.
+
+- **Analog Summing (optional)**
+  - Can sum signals before digitization to improve SNR, or skip for digital beamforming.
+
+- **ADC (per element or summed)**
+  - Converts analog signals to digital for processing.
+
 - **Controller**
-  - FPGA
-  - Microcontroller
+  - FPGA or microcontroller for digital summing/beamforming and overall system control.
+
+- **Other**
+  - Power supply, enclosure, and any necessary RF shielding.
 
 ## Challenges and Questions
 List any challenges or open questions you encounter during brainstorming:
