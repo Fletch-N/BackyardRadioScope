@@ -14,6 +14,7 @@ Small format software-directed radio telescope intended for backyard astronomy.
     - [Hardware Candidates](#hardware-candidates)
   - [Challenges and Questions](#challenges-and-questions)
   - [Next Steps](#next-steps)
+  - [Image Resolution Requirements](#image-resolution-requirements)
 
 ## Introduction
 This repository is currently a space for brainstorming, researching, and developing ideas for the BackyardRadioScope project. The goal is to explore the feasibility and design of a small, software-directed radio telescope for amateur astronomy enthusiasts.
@@ -42,6 +43,40 @@ https://resources.altium.com/p/microstrip-patch-antenna-calculator-rf-designers
   - Full Wave - 21.11 cm ( 8.32" )
   -  1/2 Wave - 10.56 cm ( 4.16" )
   -  1/4 Wave -  5.28 cm ( 2.08" )
+
+#### Field of View, Pixel Count, and Storage Tables
+
+**At 1 arcsecond per pixel:**
+
+| Field of View (deg) | Arcseconds per Side | Pixels per Side | Total Pixels         | Storage (32-bit, 4 bytes/pixel) |
+|---------------------|--------------------|-----------------|----------------------|----------------------------------|
+| 10 × 10             | 36,000             | 36,000          | 1.296 × 10⁹          | ~5.2 GB                          |
+| 30 × 30             | 108,000            | 108,000         | 1.166 × 10¹⁰         | ~46.6 GB                         |
+| 60 × 60             | 216,000            | 216,000         | 4.67 × 10¹⁰          | ~186.8 GB                        |
+| 120 × 120           | 432,000            | 432,000         | 1.87 × 10¹¹          | ~747 GB                          |
+
+**At 1 arcminute per pixel:**
+
+| Field of View (deg) | Arcminutes per Side | Pixels per Side | Total Pixels         | Storage (32-bit, 4 bytes/pixel) |
+|---------------------|--------------------|-----------------|----------------------|----------------------------------|
+| 10 × 10             | 600                | 600             | 360,000              | ~1.4 MB                          |
+| 30 × 30             | 1,800              | 1,800           | 3,240,000            | ~12.4 MB                         |
+| 60 × 60             | 3,600              | 3,600           | 12,960,000           | ~49.4 MB                         |
+| 120 × 120           | 7,200              | 7,200           | 51,840,000           | ~197.1 MB                        |
+
+**At 1 degree per pixel:**
+
+| Field of View (deg) | Pixels per Side | Total Pixels | Storage (32-bit, 4 bytes/pixel) |
+|---------------------|----------------|-------------|----------------------------------|
+| 10 × 10             | 10             | 100         | ~0.0004 MB                       |
+| 30 × 30             | 30             | 900         | ~0.0034 MB                       |
+| 60 × 60             | 60             | 3,600       | ~0.014 MB                        |
+| 120 × 120           | 120            | 14,400      | ~0.055 MB                        |
+
+- **Note:** 1 degree = 60 arcminutes = 3,600 arcseconds.
+- **Assumption:** Square field of view, 32 bits (4 bytes) per pixel.
+
+These tables illustrate how pixel scale dramatically affects storage and processing requirements. Choose the appropriate scale for your scientific goals and hardware capabilities.
 
 ### Antenna Notes
 
@@ -102,7 +137,9 @@ Functionality and cost are key concerns. The broader the band coverage the bette
   - Candidates:
     - [MAX2680](https://www.mouser.com/datasheet/2/609/MAX2680_MAX2682-3128292.pdf)
       - $3 per input
-    - 
+    - [F1152](https://www.mouser.com/datasheet/2/698/REN_F1152_DST_20120615_1-1997540.pdf)
+      - $4 per input (Dual input RF to IF)
+      - Unsure if this will actually work like I believe it will...
 
 - **Analog Summing (optional)**
   - Can sum signals before digitization to improve SNR, or skip for digital beamforming.
@@ -125,6 +162,7 @@ List any challenges or open questions you encounter during brainstorming:
 - What are the limitations of small-scale radio telescopes?
 - How can the system be made affordable without sacrificing performance?
 - What software frameworks are best suited for this project?
+- How to maintain a reasonable amount of data collection?
 
 ## Next Steps
 Outline immediate next steps or tasks to focus on. For example:
@@ -132,5 +170,20 @@ Outline immediate next steps or tasks to focus on. For example:
 - Identify potential hardware components.
 - Explore software libraries for signal processing.
 
----
+## Image Resolution Requirements
+
+The final image produced by the BackyardRadioScope will have the following characteristics:
+
+- **Fixed Output Size:** Images will be generated at a fixed resolution, for example 2000 × 2000 pixels.
+- **Pixel Format:** Each pixel will be stored as a 32-bit value (e.g., floating point or integer, depending on processing requirements), allowing for a wide dynamic range and precise intensity representation.
+- **Flexible Field of View:** The system can generate a full-sky image at maximum angular resolution, or focus on a smaller region of the sky at finer detail (e.g., arcminute or arcsecond per pixel).
+- **Example Storage Requirements:**
+  - 1000 × 1000 pixels × 4 bytes/pixel = ~4 MB per image
+  - 2000 × 2000 pixels × 4 bytes/pixel = ~16 MB per image
+  - 4000 × 4000 pixels × 4 bytes/pixel = ~64 MB per image
+- **Dynamic Mapping:** The field of view and pixel scale can be adjusted, enabling both wide-field surveys and high-detail studies.
+- **Calibration & Accuracy:** Calibration routines will ensure accurate mapping from sky coordinates to image pixels.
+- **Output Format:** Images can be exported in standard formats (e.g., PNG, FITS) for analysis or sharing.
+
+This approach provides predictable storage and processing requirements, while supporting both broad and detailed imaging modes.
 
