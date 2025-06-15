@@ -59,7 +59,14 @@ Use this section to jot down ideas, no matter how rough. For example:
 Currently imagined as a 3x3x3 cube of hardware delayed and filtered antennas. The cube will have one output that is a sum of the signals from all antennas (probably a microcontroller). Cube size is currently imagined to be somewhere between 6" and 1' in length/width/height with all 9 antennas evenly spaced and facing upwards. 
 
 ### Signal Path Layout
-Antenna (per element) => Filter => Low-Noise Amplifier (LNA) => Variable Delay/Phase Shifter (for beam steering) => (Optional: Downconverting Mixer to IF) => (Optional: Analog Summing) => ADC (per element or summed) => Controller (for digital summing/processing)
+Antenna (per element)
+  → Filter
+  → Low-Noise Amplifier (LNA)
+  → Variable Delay/Phase Shifter (for beam steering)
+  → (Optional: Downconverting Mixer to IF, LO phase-locked to master clock)
+  → (Optional: Analog Summing)
+  → ADC (per element or summed, all ADCs clocked by master clock)
+  → Controller/FPGA (also clocked by master clock)
 
 Antenna gain pattern needs to match the area of the sky seeking to be reasonably scanned. This is a maximum of 180 degrees (horizon to horizon), but more than likely will normally be less than that by 10-20 degrees from surrounding trees and houses (140 - 160 degree total range). Filters should be inline with the antenna, and before the delay. Delay/phase shifting is used for beam steering and must be controlled remotely. A downconverting mixer can be used to shift the signal to a lower intermediate frequency (IF) for easier digitization and processing. Signals can be summed in analog before ADC, or digitized individually and summed in the controller (digital beamforming). Pre-summing may help increase signal above the noise floor before hitting the controller.
 
@@ -92,6 +99,10 @@ Functionality and cost are key concerns. The broader the band coverage the bette
 
 - **Downconverting Mixer (per element, optional)**
   - Shifts the signal to a lower intermediate frequency (IF) for easier digitization and processing.
+  - Candidates:
+    - [MAX2680](https://www.mouser.com/datasheet/2/609/MAX2680_MAX2682-3128292.pdf)
+      - $3 per input
+    - 
 
 - **Analog Summing (optional)**
   - Can sum signals before digitization to improve SNR, or skip for digital beamforming.
@@ -101,6 +112,10 @@ Functionality and cost are key concerns. The broader the band coverage the bette
 
 - **Controller**
   - FPGA or microcontroller for digital summing/beamforming and overall system control.
+
+- **Master Clock**
+  - Provides a synchronized clock signal to all ADCs and digital processing components (FPGA/microcontroller) to ensure coherent sampling and processing across the array.
+  - If using downconverting mixers, local oscillators should be phase-locked to the master clock for channel coherence.
 
 - **Other**
   - Power supply, enclosure, and any necessary RF shielding.
