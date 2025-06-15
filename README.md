@@ -33,6 +33,9 @@ Document findings from your research here. Include:
 - Notes on existing technologies or similar projects.
 - Technical concepts or principles to explore.
 
+Patch Antenna Design - 
+https://resources.altium.com/p/microstrip-patch-antenna-calculator-rf-designers
+
 ### Constants
 
 - Hydrogen Line - 1.42 GHz
@@ -56,14 +59,15 @@ Use this section to jot down ideas, no matter how rough. For example:
 Currently imagined as a 3x3x3 cube of hardware delayed and filtered antennas. The cube will have one output that is a sum of the signals from all antennas (probably a microcontroller). Cube size is currently imagined to be somewhere between 6" and 1' in length/width/height with all 9 antennas evenly spaced and facing upwards. 
 
 ### Signal Path Layout
-Antenna => Filter => Amplifier => Delay => Summing? => Controller
+Antenna (per element) => Filter => Low-Noise Amplifier (LNA) => Variable Delay/Phase Shifter (for beam steering) => (Optional: Analog Summing) => ADC (per element or summed) => Controller (for digital summing/processing)
 
-Antenna gain pattern needs to match the area of the sky seeking to be reasonable scanned. This is a maximum of 180 degrees (horizon to horizon), but more than likely will normally be less than that by 10-20 degrees from surrounding trees and houses (140 - 160 degree total range). Filters should be inline with the antenna, and before the delay. Delay needs to be controlled remotely, and is responsible for the beam steering of the array. Unsure if signals should be summed in a circuit or fed straight into the controller and summed there. Might be worth pre-summing to increase signal further above noise floor before hitting the controller.
+Antenna gain pattern needs to match the area of the sky seeking to be reasonable scanned. This is a maximum of 180 degrees (horizon to horizon), but more than likely will normally be less than that by 10-20 degrees from surrounding trees and houses (140 - 160 degree total range). Filters should be inline with the antenna, and before the delay. Delay/phase shifting is used for beam steering and must be controlled remotely. Signals can be summed in analog before ADC, or digitized individually and summed in the controller (digital beamforming). Pre-summing may help increase signal above the noise floor before hitting the controller.
 
 ### Hardware Candidates
 Functionality and Cost are key concerns. Active or passive? The broader the band coverage the better, or have fixed to Hydrogen Line.
 
 - **Antennas**
+  Thinking size is the most important factor here. Directionality is secondary, and should not be too extreme to prevent limiting the directional capabilities of the phased array.
   - Helical
     - Possibly too big, unsure if antenna can be used at partial wavelength sizes
   - Dipole
@@ -71,8 +75,9 @@ Functionality and Cost are key concerns. Active or passive? The broader the band
     - https://www.mouser.com/datasheet/2/4/ant_190541b97_data_sheet-3397010.pdf
   - Log Periodic
   - Loop Antenna
-    - 1/10 wavelength circumfrence
+    -  down to 1/10 wavelength circumfrence
   - Patch
+    - 
 - **Filter**
   - Fixed or Adjustable?
   - Nooelec SAWbird+ H1 Barebones
