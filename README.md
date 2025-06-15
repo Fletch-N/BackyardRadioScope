@@ -77,7 +77,7 @@ Functionality and Cost are key concerns. Active or passive? The broader the band
   - Loop Antenna
     -  down to 1/10 wavelength circumfrence
   - Patch
-    - 
+    - about same size as full wavelength loop antenna, maybe a little smaller
 - **Filter**
   - Fixed or Adjustable?
   - Nooelec SAWbird+ H1 Barebones
