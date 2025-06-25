@@ -8,10 +8,15 @@ Small format software-directed radio telescope intended for backyard astronomy.
   - [Goals and Vision](#goals-and-vision)
   - [Research Notes](#research-notes)
     - [Constants](#constants)
+      - [Field of View, Pixel Count, and Storage Tables](#field-of-view-pixel-count-and-storage-tables)
     - [Antenna Notes](#antenna-notes)
   - [Ideas and Brainstorming](#ideas-and-brainstorming)
     - [Signal Path Layout](#signal-path-layout)
     - [Hardware Candidates](#hardware-candidates)
+  - [Software Used](#software-used)
+    - [Design and Simulation](#design-and-simulation)
+    - [Control](#control)
+    - [Processing](#processing)
   - [Challenges and Questions](#challenges-and-questions)
   - [Next Steps](#next-steps)
   - [Image Resolution Requirements](#image-resolution-requirements)
@@ -156,6 +161,14 @@ Functionality and cost are key concerns. The broader the band coverage the bette
 
 - **Other**
   - Power supply, enclosure, and any necessary RF shielding.
+
+## Software Used
+
+### Design and Simulation
+
+### Control
+
+### Processing
 
 ## Challenges and Questions
 List any challenges or open questions you encounter during brainstorming:
