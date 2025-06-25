@@ -7,6 +7,7 @@ Small format software-directed radio telescope intended for backyard astronomy.
   - [Introduction](#introduction)
   - [Goals and Vision](#goals-and-vision)
   - [Research Notes](#research-notes)
+    - [To Read](#to-read)
     - [Constants](#constants)
       - [Field of View, Pixel Count, and Storage Tables](#field-of-view-pixel-count-and-storage-tables)
     - [Antenna Notes](#antenna-notes)
@@ -41,6 +42,19 @@ Document findings from your research here. Include:
 
 Patch Antenna Design - 
 https://resources.altium.com/p/microstrip-patch-antenna-calculator-rf-designers
+
+### To Read
+
+- [Radio Telescope Front-End Survey](https://arxiv.org/pdf/1907.02491)
+- [Introduction to Radio Astronomy](https://www.jb.man.ac.uk/ira4/IRA4%20SuppMat_Chapter1_and_Prologue.htm)
+- [Antennas for Radio Astronomy](https://www.arrl.org/files/file/Antennas%20for%20Radio%20Astronomy%20-%20PDF.pdf)
+- [Radio Astronomy Receivers](https://apps.dtic.mil/sti/tr/pdf/AD0268503.pdf)
+- [Example Amateur Scope Build](https://physicsopenlab.org/2020/10/10/a-simple-11-2-ghz-radiotelescope/)
+- [Fundamentals of Radio Astronomy](https://pulsar.sternwarte.uni-erlangen.de/black-hole/1stschool/coursematerial/Lang_Fundamentals_June09.pdf)
+- [Instruments for RadioAstronomy](https://moodle2.units.it/pluginfile.php/719589/mod_resource/content/1/Lezione7-27-03-24.pdf)
+- [Example Scope Build and Software Setup](https://www.rtl-sdr.com/cheap-and-easy-hydrogen-line-radio-astronomy-with-a-rtl-sdr-wifi-parabolic-grid-dish-lna-and-sdrsharp/)
+- [Telescope Setup](https://www.radio-astronomy.org/node/118)
+- 
 
 ### Constants
 
@@ -89,6 +103,26 @@ These tables illustrate how pixel scale dramatically affects storage and process
 - Antenna Wave Size - 1/4, 1/2, Full
   - Hydrogen Line - 
 - Antenna spacing - 1/2 wave
+
+### Loop Antenna Size and Performance Table (1.42 GHz)
+
+| Fraction of Wavelength | Circumference (cm) | Diameter (cm) | Approx. Impedance (Ω) | Approx. Gain (dBi) | Efficiency (%) | Bandwidth (MHz) |
+|-----------------------|--------------------|---------------|-----------------------|--------------------|----------------|-----------------|
+| 1 (Full wave)         | 21.11              | 6.72          | 100–120               | 2.0–2.5            | 90–95          | 110–140         |
+| 0.9                   | 19.00              | 6.05          | 90–110                | 1.8–2.2            | 85–90          | 90–120          |
+| 0.8                   | 16.89              | 5.38          | 80–100                | 1.5–2.0            | 80–85          | 70–100          |
+| 0.7                   | 14.78              | 4.71          | 70–90                 | 1.2–1.8            | 75–80          | 55–80           |
+| 0.6                   | 12.67              | 4.03          | 60–80                 | 1.0–1.5            | 65–75          | 40–60           |
+| 0.5 (Half wave)       | 10.56              | 3.36          | 50–70                 | 0.5–1.2            | 50–65          | 25–40           |
+| 0.4                   | 8.44               | 2.69          | 40–60                 | 0.0–0.8            | 35–50          | 10–20           |
+| 0.3                   | 6.33               | 2.02          | 30–50                 | -1.0–0.5           | 20–35          | 3–8             |
+| 0.2                   | 4.22               | 1.34          | 20–40                 | -2.5–-0.5          | 10–20          | 1–2             |
+| 0.1                   | 2.11               | 0.67          | 10–20                 | -5.0–-2.0          | <10            | <1              |
+
+**Notes:**
+- All values are approximate and for free-space, single-turn circular loops at 1.42 GHz (Hydrogen Line).
+- Bandwidth is for VSWR < 2:1 and depends on construction and matching.
+- Small loops (<0.2λ) are very inefficient and narrowband, but may be useful for compact arrays.
 
 ## Ideas and Brainstorming
 Use this section to jot down ideas, no matter how rough. For example:
